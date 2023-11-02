@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "623254871252",
+    "project_id": "eth-ride-f0c3e",
+    "storage_bucket": "eth-ride-f0c3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623254871252:android:453a79aca45c8eee882f41",
+        "android_client_info": {
+          "package_name": "com.example.eth_ride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEctTUfraPsQ3jETULgTFBEH-ZNxwSbnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
