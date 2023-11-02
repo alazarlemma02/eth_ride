@@ -18,7 +18,9 @@ class FirebaseServices {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return ProgressIndicatorDialog(message: "Registering, Please wait...",);
+          return ProgressIndicatorDialog(
+            message: "Registering, Please wait...",
+          );
         },
       );
       final User firebaseUser = (await _firebaseAuth
@@ -42,6 +44,22 @@ class FirebaseServices {
             backgroundColor: Colors.white,
           ),
         );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 10),
+            content: Center(
+              child: Text(
+                "Please login to continue,👋",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: CommonMethods.primaryColor,
+                ),
+              ),
+            ),
+            backgroundColor: Colors.white,
+          ),
+        );
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -83,7 +101,9 @@ class FirebaseServices {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return ProgressIndicatorDialog(message: "Please wait...",);
+        return ProgressIndicatorDialog(
+          message: "Please wait...",
+        );
       },
     );
     try {
