@@ -20,6 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final CommonMethods commonMethods = CommonMethods(context: context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(commonMethods.getWidth() * 0.02),
@@ -101,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(5, 182, 252, 100),
                         minimumSize: Size(commonMethods.getWidth() * 0.9,
-                            commonMethods.getHeight() * 0.07),
+                            commonMethods.getHeight() * 0.05),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -122,7 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: const Text(
                         "Sign In",
-                        style: TextStyle(fontSize: 24, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     TextButton(

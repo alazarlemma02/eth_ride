@@ -1,6 +1,7 @@
 import 'package:eth_ride/concern/common.dart';
 import 'package:eth_ride/view/screens/home.dart';
 import 'package:eth_ride/view/screens/signin_screen.dart';
+import 'package:eth_ride/view/widgets/progress_indicator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,13 @@ class FirebaseServices {
   void registerUser(String email, String password, String phoneNumber,
       String name, BuildContext context) async {
     try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return ProgressIndicatorDialog(message: "Registering, Please wait...",);
+        },
+      );
       final User firebaseUser = (await _firebaseAuth
               .createUserWithEmailAndPassword(email: email, password: password))
           .user!;
@@ -41,6 +49,7 @@ class FirebaseServices {
           ),
         );
       } else {
+        Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Center(
@@ -54,6 +63,7 @@ class FirebaseServices {
         );
       }
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Center(
@@ -69,6 +79,13 @@ class FirebaseServices {
   }
 
   void signinUser(String email, String password, BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ProgressIndicatorDialog(message: "Please wait...",);
+      },
+    );
     try {
       final User firebaseUser = (await _firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
@@ -100,11 +117,13 @@ class FirebaseServices {
             );
           }
         } catch (error) {
+          Navigator.pop(context);
           // Handle any potential errors here.
           print("Error: $error");
         }
       } else {
         _firebaseAuth.signOut();
+        Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Center(
@@ -118,6 +137,7 @@ class FirebaseServices {
         );
       }
     } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Center(
