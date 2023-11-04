@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:eth_ride/concern/common.dart';
+import 'package:eth_ride/services/google_map_services.dart';
 import 'package:eth_ride/view/widgets/drawer.dart';
 import 'package:eth_ride/view/widgets/location_search_engine.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+  final GoogleMapServices _googleMapServices = GoogleMapServices();
+  double mapBottomPadding = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +44,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           GoogleMap(
+            padding: EdgeInsets.only(bottom: mapBottomPadding),
             myLocationButtonEnabled: true,
+            myLocationEnabled: true,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
             mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _googleMapController.complete(controller);
+              setState(() {
+                mapBottomPadding = MediaQuery.of(context).size.height * 0.4;
+              });
+              _googleMapServices.locateUserPostion();
             },
           ),
           Positioned(
@@ -53,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: 0,
             left: 0,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.4,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
